@@ -1,0 +1,26 @@
+{
+  "name": "cms-api",
+  "version": "1.0.0",
+  "description": "API cadastro de posts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "sequelize",
+    "cms",
+    "express",
+    "mysql"
+  ],
+  "author": "Thales Morais de Almeida",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.2",
+    "sequelize": "^5.21.3",
+    "sequelize-cli": "^5.5.1"
+  }
+}
