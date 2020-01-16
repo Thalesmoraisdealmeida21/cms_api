@@ -115,5 +115,36 @@ module.exports = () =>{
             })
         },
     
+        uploadImage: (req, res)=>{
+            const formidable = require('formidable');
+            var path = require('path');
+            var fs = require('fs');
+            const form = new formidable.IncomingForm();
+    
+       
+            form.parse(req, function(err, fields, files){
+    
+                
+                fs.rename(files.capa.path,  path.join(__dirname, "../images/", files.capa.name), (err)=>{
+                            if(err){
+                               
+                                res.end('Falha ao renomear o arquivo')
+                            }
+                            
+                })
+    
+                const pathImg = "images/" + files.capa.name
+                res.json({"file": files, "pathImg": pathImg})
+    
+              
+               
+     
+            })
+    
+        
+    
+            form.uploadDir = path.join(__dirname, "../images/")
+           
+        }
     }
 }
