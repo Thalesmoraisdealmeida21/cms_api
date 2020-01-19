@@ -10,6 +10,10 @@ class Post extends Model {
             descricao: {
                 type: DataTypes.TEXT,
                 allowNull: false,
+            },
+            imgCapa: {
+                type: DataTypes.STRING,
+                allowNull: true
             }
         }, {
             sequelize

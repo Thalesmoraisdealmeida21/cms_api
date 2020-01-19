@@ -1,9 +1,10 @@
 const PostCotroller = require('./../controllers/PostController')
 const Post = PostCotroller();
+const authRequest = require('./../../middleware/auth')
 
 module.exports = (router) => {
     
-    router.post("/post", (req, res)=>{
+    router.post("/post", authRequest, (req, res)=>{
         Post.createPost(req, res);
     })
     
@@ -11,7 +12,7 @@ module.exports = (router) => {
        Post.getAllPosts(req, res);
     })
 
-    router.post("/upload", (req, res)=>{
+    router.post("/upload", authRequest, (req, res)=>{
             Post.uploadImage(req, res);
      })
 
@@ -21,20 +22,20 @@ module.exports = (router) => {
         Post.getOnePost(req, res);
      })
 
-    router.delete("/post/:id", (req, res)=>{
+    router.delete("/post/:id", authRequest, (req, res)=>{
         Post.deletePost(req, res);
     })
 
 
 
-    router.post("/post/update/:id", (req, res)=>{
+    router.post("/post/update/:id", authRequest, (req, res)=>{
         Post.updatePost(req, res);
     })
 
   
 
 
-     router.get("/post/search/title", (req, res)=>{
+     router.get("/post/search/title", authRequest, (req, res)=>{
         Post.getPostByTitle(req, res);
      })
 

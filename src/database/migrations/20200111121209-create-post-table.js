@@ -19,6 +19,10 @@ module.exports = {
                 type: Sequelize.TEXT,
                 allowNull: false,
               },
+              imgCapa: {
+                type: Sequelize.STRING,
+                allowNull: true
+              },
               createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false

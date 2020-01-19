@@ -7,12 +7,14 @@ module.exports = () =>{
         createPost: (req, res)=>{
             const data = {
                 titulo: req.body.titulo,
-                descricao: req.body.descricao
+                descricao: req.body.descricao,
+                imgCapa: req.body.path
             }
 
             ModelPost.create({
                 titulo: data.titulo,
-                descricao: data.descricao
+                descricao: data.descricao,
+                imgCapa: data.imgCapa
             }).then((userCreated)=> {
                 res.status(201).json(userCreated)
             })
@@ -59,12 +61,14 @@ module.exports = () =>{
                 const postId = req.params.id
                 const data = {
                     titulo: req.body.titulo,
-                    descricao:  req.body.descricao
+                    descricao:  req.body.descricao,
+                    imgCapa: req.body.path
                 }
 
                 ModelPost.update({
                     titulo: data.titulo,
-                    descricao: data.descricao
+                    descricao: data.descricao,
+                    imgCapa: data.imgCapa
                 }, {
                     where: {
                     id: postId
