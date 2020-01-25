@@ -10,18 +10,20 @@ module.exports = (req, res, next) =>{
     jsonwebtoken.verify(token, secret, (err, decoded)=>{
        if(err){
            res.status(401).end();
-       } 
+       } else {
+        blacklist.findAll({
+            where: {
+                token: token
+            }
+        }).then((tokenFound)=>{
+            if(tokenFound.length > 0){
+                res.status(401).end();
+            }
+            return next();
+        })
+       }
 
-       blacklist.findAll({
-           where: {
-               token: token
-           }
-       }).then((tokenFound)=>{
-           if(tokenFound.length > 0){
-               res.status(401).end();
-           }
-           return next();
-       })
+      
 
        console.log(decoded)
    

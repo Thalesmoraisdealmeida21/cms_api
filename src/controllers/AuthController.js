@@ -50,9 +50,9 @@ module.exports = () =>{
                     blacklist.create({
                         token: token
                     })
-                    return res.status(200).end("Deslogado 1");
+                    return res.status(200).end();
                 } else {
-                    return res.status(200).end("Deslogado 2");
+                    return res.status(200).end();
                 }
             })
      
