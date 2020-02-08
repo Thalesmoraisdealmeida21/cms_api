@@ -93,17 +93,25 @@ module.exports = () =>{
         },
 
         getPostByTitle: (req, res)=>{
-            const titulo = req.body.titulo;
+            const { title }= req.params;
+            console.log(title)
+            if(title == "none"){
+                ModelPost.findAll().then((posts)=>{
+                    res.status(200).json(posts)
+                })
+            } else {
+                ModelPost.findAll({
+                    where: {
+                        titulo:{
+                            [Op.like]: '%' + title + '%'
+                        } 
+                    }
+                }).then((post)=>{
+                    res.status(200).json(post)
+                })
+            }
 
-            ModelPost.findAndCountAll({
-                where: {
-                    titulo:{
-                        [Op.like]: '%' + title + '%'
-                    } 
-                }
-            }).then((post)=>{
-                res.status(200).json(post)
-            })
+            
         },
         getPostByDescription: (req, res)=>{
             const descricao = req.body.descricao;

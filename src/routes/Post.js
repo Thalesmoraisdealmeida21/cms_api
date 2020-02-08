@@ -35,7 +35,7 @@ module.exports = (router) => {
   
 
 
-     router.get("/post/search/title", authRequest, (req, res)=>{
+     router.get("/post/search/title/:title", authRequest, (req, res)=>{
         Post.getPostByTitle(req, res);
      })
 
