@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Blacklist extends Model {
+class blacklist extends Model {
   static init(sequelize){
     super.init({
         token: {
@@ -15,4 +15,4 @@ class Blacklist extends Model {
   }
 }
 
-module.exports = Blacklist;
+module.exports = blacklist;

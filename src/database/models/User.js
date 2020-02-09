@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class User extends Model {
+class user extends Model {
   static init(sequelize){
     super.init({
       username: {
@@ -22,4 +22,4 @@ class User extends Model {
   }
 }
 
-module.exports = User;
+module.exports = user;

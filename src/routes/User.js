@@ -5,7 +5,7 @@ const authRequest = require('./../../middleware/auth');
 
 module.exports = (router) => {
 
-    router.post("/user", authRequest, (req, res)=>{
+    router.post("/user", /*authRequest,*/ (req, res)=>{
         User.createUser(req, res)
     })
     
