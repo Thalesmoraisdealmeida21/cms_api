@@ -3,6 +3,9 @@ const User = require('../database/models/User');
 const blacklist = require('../database/models/Blacklist')
 const {secret} = require('../config/config')
 const bcrypt = require('bcrypt')
+const Op = require('sequelize').Op
+
+
 module.exports = () =>{
     return {
         authenticate: (req, res)=>{
@@ -14,7 +17,10 @@ module.exports = () =>{
             
             User.findOne({
                 where: {
-                    username: username,
+                    [Op.or]: {
+                        username: username,
+                        email: username
+                    }
                   
                 }
             }).then((userFound)=>{
@@ -24,6 +30,7 @@ module.exports = () =>{
                     bcrypt.compare(password, userFound.password, (err, result)=>{
                         if(result){
                             const token = jsonwebtoken.sign({
+                               
                                 username: username,
                                 password: password
                             },
@@ -34,7 +41,6 @@ module.exports = () =>{
                             res.status(401).json({msg: "Senha Inválida"})
                         }                        
                         if(err){
-                           
                             res.status(401).json(err);
                         }
                     })
