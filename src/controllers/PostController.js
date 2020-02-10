@@ -11,6 +11,8 @@ module.exports = () =>{
                 imgCapa: req.body.path
             }
 
+            
+
             ModelPost.create({
                 titulo: data.titulo,
                 descricao: data.descricao,

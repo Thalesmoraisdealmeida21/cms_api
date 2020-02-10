@@ -1,4 +1,12 @@
 const nodemailer = require("nodemailer");
+const emailConfig = require("./../database/models/ConfigEmail");
+
+const configEmail = null
+
+
+
+
+
 
 
 const sendMailContact = (dataMessage) => {
@@ -27,24 +35,26 @@ const sendMailContact = (dataMessage) => {
 
 
 const sendMail= (from, to, subject, message) =>{
-  const transporter = nodemailer.createTransport({
-    host: "smtp.office365.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: "thalesmoraisdealmeida@outlook.com", // generated ethereal user
-      pass: "tma211097  " // generated ethereal password
-    }
-  })
 
-  console.log("thalesmoraisdealmeida@outlook.com")
+emailConfig.findOne().then((configEmail)=>{
 
-  transporter.sendMail({
-    from: "thalesmoraisdealmeida@outlook.com",
-    to: to,
-    subject: subject,
-    html: message
-  })
+    const transporter = nodemailer.createTransport({
+      host: configEmail.host,
+      port: configEmail.port,
+      secure: configEmail.secure, 
+      auth: {
+        user: configEmail.user,
+        pass: configEmail.password
+      }
+    })
+    transporter.sendMail({
+      from: configEmail.user,
+      to: to,
+      subject: subject,
+      html: message
+    })
+
+})
 
 
 }
