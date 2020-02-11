@@ -8,7 +8,15 @@ module.exports = (router) => {
     })
 
 
+    router.post("/email/initconfig", (req, res)=>{
+        email.initConfig(req, res)
+    })
+
     router.post("/email/setconfig", (req, res)=>{
         email.setConfig(req, res)
+    })
+
+    router.get("/email/getconfig", (req, res)=>{
+        email.getConfig(req, res);
     })
 }

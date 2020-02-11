@@ -11,17 +11,20 @@ module.exports = () => {
                 message: req.body.message
             }
 
-            console.log(data)
      
-            sendMail(data.from, data.to, data.subject, data.message)
+            if(sendMail(data.from, data.to, data.subject, data.message)){
+                res.json(data)
+            } else {
+                res.status(200).json({msg: "ocorreu um erro"})
+            }
 
-            res.json(data)
+            
 
             
         
         },
 
-        setConfig: (req, res)=>{
+        initConfig: (req, res)=>{
             const {host, port, secure, user, password} = req.body
             
 
@@ -36,13 +39,32 @@ module.exports = () => {
             })
 
         },
+
+        setConfig: (req, res)=> {
+            const {id, host, port, secure, user, password} = req.body
+
+            ConfigEmail.update({
+                host: host,
+                secure: secure,
+                port: port,
+                user: user,
+                password: password
+                
+            }, {
+                where: {
+                    id: id
+                }
+            }).then(success => res.json(success))
+
+           
+        },
         
         getConfig: (req, res)=>{
-            ConfigEmail.findAll().then((config)=>{
+            ConfigEmail.findOne().then((config)=>{
                 if(config){
                     res.json(config)
                 } else {
-                    res.json({msg: "Não existe configuração de e-mail cadastrada"})
+                    res.end();
                 }
                 
             })

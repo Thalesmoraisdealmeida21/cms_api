@@ -5,24 +5,24 @@ class ConfigEmail extends Model {
     super.init({
       host: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         
       },
       port: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       secure: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       }, 
       user: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       }
     },
     {

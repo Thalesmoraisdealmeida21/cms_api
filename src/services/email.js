@@ -36,25 +36,34 @@ const sendMailContact = (dataMessage) => {
 
 const sendMail= (from, to, subject, message) =>{
 
-emailConfig.findOne().then((configEmail)=>{
+  try {
+    emailConfig.findOne().then((configEmail)=>{
 
-    const transporter = nodemailer.createTransport({
-      host: configEmail.host,
-      port: configEmail.port,
-      secure: configEmail.secure, 
-      auth: {
-        user: configEmail.user,
-        pass: configEmail.password
+      const transporter = nodemailer.createTransport({
+        host: configEmail.host,
+        port: configEmail.port,
+        secure: configEmail.secure, 
+        auth: {
+          user: configEmail.user,
+          pass: configEmail.password
+        }
+      })
+      transporter.sendMail({
+        from: configEmail.user,
+        to: to,
+        subject: subject,
+        html: message
+      })
+  
+  })
+  return true
+  } catch (err) {
+      if(err){
+        return false
       }
-    })
-    transporter.sendMail({
-      from: configEmail.user,
-      to: to,
-      subject: subject,
-      html: message
-    })
+  }
 
-})
+
 
 
 }
