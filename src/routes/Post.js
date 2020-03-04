@@ -12,6 +12,10 @@ module.exports = (router) => {
        Post.getAllPosts(req, res);
     })
 
+    router.get("/posts/:page", (req, res)=>{
+        Post.getAllPostsPaginated(req, res);
+     })
+
     router.post("/upload", authRequest, (req, res)=>{
             Post.uploadImage(req, res);
      })

@@ -159,6 +159,16 @@ module.exports = () =>{
     
             form.uploadDir = path.join(__dirname, "../images/")
            
+        },
+
+        getAllPostsPaginated: (req, res)=>{
+            const page = parseInt(req.params.page)
+            ModelPost.findAll({
+                limit: 3,
+                offset: page    
+            }).then((posts)=>{
+                res.json(posts)
+            })
         }
     }
 }
