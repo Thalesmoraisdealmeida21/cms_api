@@ -12,8 +12,16 @@ module.exports = (router) => {
        Post.getAllPosts(req, res);
     })
 
+    router.get("/posts/count", (req, res)=>{
+        Post.countPosts(req, res);
+     })
+     
     router.get("/posts/:page", (req, res)=>{
         Post.getAllPostsPaginated(req, res);
+     })
+
+     router.get("/posts/count", (req, res)=>{
+        Post.countPosts(req, res);
      })
 
     router.post("/upload", authRequest, (req, res)=>{

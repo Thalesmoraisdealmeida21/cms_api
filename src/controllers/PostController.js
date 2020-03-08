@@ -163,12 +163,24 @@ module.exports = () =>{
 
         getAllPostsPaginated: (req, res)=>{
             const page = parseInt(req.params.page)
-            ModelPost.findAll({
-                limit: 3,
-                offset: page    
-            }).then((posts)=>{
-                res.json(posts)
-            })
+            const offsetPage = ((page - 1) * 3);
+            if(offsetPage < 0){
+                res.status(300).json({msg: "Número da página informado é invalido"})
+            } else {
+                ModelPost.findAll({
+                    limit: 3,
+                    offset: offsetPage    
+                }).then((posts)=>{
+                    res.json(posts)
+                })
+            }
+          
+        },
+
+        countPosts: (req, res)=>{
+            ModelPost.findAndCountAll().then((postsCounteds)=>{
+                    res.json(postsCounteds);
+            })  
         }
     }
 }
