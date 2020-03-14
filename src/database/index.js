@@ -6,6 +6,7 @@ const Post = require('./models/Post');
 const Blacklist = require('./models/Blacklist');
 const Contact = require('./models/Contact');
 const ConfigEmail = require('./models/ConfigEmail');
+const AreasAtuacao = require('./models/AreasAtuacao')
 
 const connection = new Sequelize(dbConfig);
 
@@ -14,6 +15,7 @@ Post.init(connection);
 Blacklist.init(connection);
 Contact.init(connection);
 ConfigEmail.init(connection);
+AreasAtuacao.init(connection);
 
 
 

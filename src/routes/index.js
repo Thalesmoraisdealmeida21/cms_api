@@ -6,6 +6,7 @@ require('./Post')(router)
 require('./Auth')(router)
 require('./Contact')(router)
 require('./Email')(router)
+require('./AreasAtuacao')(router)
 router.get("/", (req, res)=>{
     res.json({"msg": "Aplicação está sendo executada ;)"})
 })
