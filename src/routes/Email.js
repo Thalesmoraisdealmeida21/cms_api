@@ -4,7 +4,7 @@ const authRequest = require('./../../middleware/auth')
 module.exports = (router) => {
 
 
-    router.post("/sendmail", authRequest, (req, res)=>{
+    router.post("/sendmail", (req, res)=>{
         email.sendMail(req, res);
     })
 

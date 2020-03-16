@@ -13,17 +13,26 @@ module.exports = (router) => {
         AreaAtuacaoController.create(req, res);
     })
 
+    router.get('/areas-atuacao/find/:name', (req, res)=>{
+        AreaAtuacaoController.getByName(req, res);
+    })
 
-    router.get('/areas-atuacao/find/:id', (req, res)=>{
+    router.get('/areas-atuacao/find/id/:id', authRequest, (req, res)=>{
         AreaAtuacaoController.getOne(req, res);
     })
+
+    router.post('/areas-atuacao/update/:id', authRequest, (req, res)=>{
+        AreaAtuacaoController.update(req, res);
+    })
+
+ 
 
 
     router.get('/areas-atuacao/find', (req, res)=>{
         AreaAtuacaoController.getAll(req, res);
     })
 
-    router.get('/areas-atuacao/delete/:id', (req, res)=>{
+    router.delete('/areas-atuacao/delete/:id', (req, res)=>{
         AreaAtuacaoController.deleteOne(req, res);
     })
 

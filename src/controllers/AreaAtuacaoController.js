@@ -13,7 +13,33 @@ module.exports = () =>{
                 res.status(200).json(areaCreated)
             })
         },
+        update: (req, res)=>{
+                const {nome, descricao} = req.body
+                const {id} = req.params
 
+                areasAtuacao.update({
+                    nome: nome,
+                    descricao: descricao 
+                }, {
+                    where:{
+                        id: id
+                    }  
+                }).then((respon)=>{
+                    res.status(200).json(respon)
+                })
+        },
+         
+        getByName: (req, res)=>{
+            const {name} = req.params;
+
+            areasAtuacao.findOne({
+                where: {
+                    nome: name
+                }
+            }).then((areaAtuacao)=>{
+                res.status(200).json(areaAtuacao)
+            })
+        },
         getAll: (req, res)=>{
             areasAtuacao.findAll().then((areasAtuacao)=>{
                 res.status(200).json(areasAtuacao);
