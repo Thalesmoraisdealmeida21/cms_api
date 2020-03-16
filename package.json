@@ -1,7 +1,7 @@
 {
   "name": "cms_api",
   "version": "1.0.0",
-  "description": "API cadastro de posts",
+  "description": "API - Para funcionamento do CMS e Site",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
