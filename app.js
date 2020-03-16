@@ -3,6 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express();
+const porta = process.env.PORT_APP || 3000
 
 
 
@@ -17,6 +18,6 @@ app.use("/", cors(), require('./src/routes/index'))
 require('./src/database/index')
 
 
-app.listen(3000, ()=>{
+app.listen(porta, ()=>{
     console.log("Application has been started")
 })
