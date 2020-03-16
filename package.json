@@ -1,5 +1,5 @@
 {
-  "name": "cms-api",
+  "name": "cms_api",
   "version": "1.0.0",
   "description": "API cadastro de posts",
   "main": "app.js",
