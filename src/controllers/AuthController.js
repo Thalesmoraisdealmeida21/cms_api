@@ -2,7 +2,7 @@ const jsonwebtoken = require('jsonwebtoken')
 const User = require('../database/models/User');
 const blacklist = require('../database/models/Blacklist')
 const {secret} = require('../config/config')
-const bcrypt = require('bcrypt')
+
 const Op = require('sequelize').Op
 
 
@@ -19,36 +19,21 @@ module.exports = () =>{
                 where: {
                     [Op.or]: {
                         username: username,
-                        email: username
-                    }
+                        email: username,
+                        
+                    },
+                    password: password
                   
                 }
             }).then((userFound)=>{
                 
-                if(userFound){
-                   
-                    bcrypt.compare(password, userFound.password, (err, result)=>{
-                        if(result){
-                            const token = jsonwebtoken.sign({
-                               
-                                username: username,
-                                password: password
-                            },
-                                secret
-                             )
-                            res.status(200).json({"token": token})
-                        } else {
-                            res.status(401).json({msg: "Senha Inválida"})
-                        }                        
-                        if(err){
-                            res.status(401).json(err);
-                        }
-                    })
-                  
-                } else {
-                    res.status(401).json({msg: "Usuário não encontrado"})
-                }
-            })
+                    if(userFound){
+                        res.status(200).json({"token": token});
+                    } else {
+                        res.status(401).json({msg: "Usuário não encontrado"})
+                    }
+                })
+
         },
 
         logout: (req, res)=>{
