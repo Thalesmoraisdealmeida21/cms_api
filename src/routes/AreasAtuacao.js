@@ -9,9 +9,15 @@ const AreaAtuacaoController = AreaAtuacao();
 
 module.exports = (router) => {
 
+    router.post('/areas-atuacao/upload', (req, res)=>{
+        AreaAtuacaoController.uploadImage(req, res);
+    })
+
     router.post('/areas-atuacao/create', authRequest, (req, res)=>{
         AreaAtuacaoController.create(req, res);
     })
+
+   
 
     router.get('/areas-atuacao/find/:name', (req, res)=>{
         AreaAtuacaoController.getByName(req, res);

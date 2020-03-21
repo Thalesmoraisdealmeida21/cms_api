@@ -14,12 +14,13 @@ module.exports = () =>{
             })
         },
         update: (req, res)=>{
-                const {nome, descricao} = req.body
+                const {nome, descricao, icone} = req.body
                 const {id} = req.params
 
                 areasAtuacao.update({
                     nome: nome,
-                    descricao: descricao 
+                    descricao: descricao, 
+                    icone: icone
                 }, {
                     where:{
                         id: id
@@ -29,6 +30,30 @@ module.exports = () =>{
                 })
         },
          
+
+        uploadImage: (req, res)=>{
+            const formidable = require('formidable');
+            var path = require('path');
+            var fs = require('fs');
+            const form = new formidable.IncomingForm();
+
+            form.parse(req, function(err, field, files){
+                
+
+                    fs.rename(files.icone.path, path.join(__dirname, "../images/areasatuacao", files.icone.name), (err)=>{
+                        if(err){
+                            res.end('Falha ao renomear o arquivo');
+                        }
+                    })
+
+                    console.log(files.icone.path)
+
+                    const pathImg = "images/areasatuacao/" + files.icone.name
+                    res.json({"file": files, "pathImg": pathImg})
+            })
+
+            form.uploadDir = path.join(__dirname, "../images/areasatuacao/")
+        },
         getByName: (req, res)=>{
             const {name} = req.params;
 

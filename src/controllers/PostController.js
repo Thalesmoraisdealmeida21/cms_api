@@ -146,6 +146,9 @@ module.exports = () =>{
                             }
                             
                 })
+
+
+                console.log(files.capa.path)
     
                 const pathImg = "images/" + files.capa.name
                 res.json({"file": files, "pathImg": pathImg})
