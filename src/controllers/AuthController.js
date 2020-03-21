@@ -28,7 +28,12 @@ module.exports = () =>{
             }).then((userFound)=>{
                 
                     if(userFound){
+                        const token = jsonwebtoken.sign({
+                            userFound
+                        }, secret)
+                        
                         res.status(200).json({"token": token});
+                      
                     } else {
                         res.status(401).json({msg: "Usuário não encontrado"})
                     }

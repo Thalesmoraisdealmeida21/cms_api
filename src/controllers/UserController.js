@@ -16,7 +16,7 @@ module.exports = () => {
             User.create({
                 username: data.username,
                 email: data.email,
-                password: hash
+                password: data.password
               }).then((user)=>{
                   if(user){
                       res.json(user)

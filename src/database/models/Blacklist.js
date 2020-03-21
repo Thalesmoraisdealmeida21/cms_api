@@ -4,7 +4,7 @@ class blacklist extends Model {
   static init(sequelize){
     super.init({
         token: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         }
     },
     {

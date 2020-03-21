@@ -5,7 +5,7 @@ module.exports = {
 
       return queryInterface.createTable('blacklists', 
       {
-         token: Sequelize.STRING,
+         token: Sequelize.TEXT,
          id: Sequelize.INTEGER
         });
     
