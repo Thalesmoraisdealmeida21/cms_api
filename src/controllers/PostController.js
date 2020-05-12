@@ -8,6 +8,7 @@ module.exports = () =>{
             const data = {
                 titulo: req.body.titulo,
                 descricao: req.body.descricao,
+                resumo: req.body.resumo,
                 imgCapa: req.body.path
             }
 
@@ -16,6 +17,7 @@ module.exports = () =>{
             ModelPost.create({
                 titulo: data.titulo,
                 descricao: data.descricao,
+                resumo: data.resumo,
                 imgCapa: data.imgCapa
             }).then((userCreated)=> {
                 res.status(201).json(userCreated)

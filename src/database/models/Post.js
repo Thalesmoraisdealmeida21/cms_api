@@ -7,6 +7,10 @@ class post extends Model {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            resumo: {
+                type: DataTypes.TEXT,
+                allowNull: true
+            },
             descricao: {
                 type: DataTypes.TEXT,
                 allowNull: false,
