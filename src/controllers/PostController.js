@@ -66,12 +66,14 @@ module.exports = () =>{
                 const data = {
                     titulo: req.body.titulo,
                     descricao:  req.body.descricao,
+                    resumo:  req.body.resumo,
                     imgCapa: req.body.path
                 }
 
                 ModelPost.update({
                     titulo: data.titulo,
                     descricao: data.descricao,
+                    resumo: data.resumo,
                     imgCapa: data.imgCapa
                 }, {
                     where: {

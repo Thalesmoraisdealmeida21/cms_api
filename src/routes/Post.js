@@ -40,7 +40,7 @@ module.exports = (router) => {
 
 
 
-    router.post("/post/update/:id", authRequest, (req, res)=>{
+    router.put("/post/update/:id", authRequest, (req, res)=>{
         Post.updatePost(req, res);
     })
 
