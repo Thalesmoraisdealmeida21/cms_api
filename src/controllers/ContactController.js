@@ -14,23 +14,19 @@ module.exports = () => {
                 }
 
 
-                Contact.create({
-                    nome: data.nome,
-                    email: data.email,
-                    telefone: data.telefone,
-                    assunto: data.assunto,
-                    mensagem: data.mensage
-                }).then((contact)=>{
-                    res.status(201).json(contact);
-                })
+          
 
+            
 
                 try {
-                    sendMailContact(data);
+                    sendMailContact(data)
+                    res.status(200)
+                    console.log("Enviou")
                 } catch (e){
-                    res.status(400).json(e);
+                    res.status(400).json(e.message);
 
                 }
+           
         },
         
         deleteContact: (req, res)=>{
