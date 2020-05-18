@@ -16,11 +16,15 @@ module.exports = () => {
 
           
 
-            
+                        
+
+            Contact.create({
+                data
+            })
 
                 try {
                     sendMailContact(data)
-                    res.status(200)
+                    res.status(200).end();
                     console.log("Enviou")
                 } catch (e){
                     res.status(400).json(e.message);

@@ -9,7 +9,7 @@ const emailConfig = require("./../database/models/ConfigEmail");
 
 
 
-const  sendMailContact =  (dataMessage) => {
+const  sendMailContact =  async (dataMessage) => {
 
  
      emailConfig.findOne().then((configEmail)=>{
