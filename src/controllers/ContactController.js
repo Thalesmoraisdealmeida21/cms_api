@@ -19,7 +19,10 @@ module.exports = () => {
                         
 
             Contact.create({
-                data
+                nome: data.nome,
+                email: data.email,
+                telefone: data.telefone,
+                assunto: data.assunto
             })
 
                 try {

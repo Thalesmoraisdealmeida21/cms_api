@@ -1,6 +1,21 @@
-
+const path = require("path");
+const multer = require("multer");
 const ModelPost = require('./../database/models/Post')
 const Op = require('sequelize').Op
+
+const storage = multer.diskStorage({
+    destination: "./../images/",
+    filename: function(req, file, cb){
+        cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
+    }
+})
+
+
+const upload =  multer({
+    storage: storage,
+    limits: {fileSize: 1000000}
+}).single("myImage");
+
 
 module.exports = () =>{
     return {
@@ -9,8 +24,11 @@ module.exports = () =>{
                 titulo: req.body.titulo,
                 descricao: req.body.descricao,
                 resumo: req.body.resumo,
-                imgCapa: req.body.path
+                imgCapa: req.body.imgCapa
             }
+
+
+     
 
             
 
@@ -67,7 +85,7 @@ module.exports = () =>{
                     titulo: req.body.titulo,
                     descricao:  req.body.descricao,
                     resumo:  req.body.resumo,
-                    imgCapa: req.body.path
+                    imgCapa: req.body.imgCapa
                 }
 
                 ModelPost.update({
@@ -134,6 +152,7 @@ module.exports = () =>{
         },
     
         uploadImage: (req, res)=>{
+
             const formidable = require('formidable');
             var path = require('path');
             var fs = require('fs');
@@ -165,7 +184,6 @@ module.exports = () =>{
         
     
             form.uploadDir = path.join(__dirname, "../images/")
-           
         },
 
         getAllPostsPaginated: (req, res)=>{
@@ -176,7 +194,12 @@ module.exports = () =>{
             } else {
                 ModelPost.findAll({
                     limit: 3,
-                    offset: offsetPage    
+                    offset: offsetPage,
+                    order: [
+                        
+                        ['createdAt', 'DESC'],
+                    ]
+                      
                 }).then((posts)=>{
                     res.json(posts)
                 })

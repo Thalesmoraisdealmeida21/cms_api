@@ -39,7 +39,7 @@ const  sendMailContact =  async (dataMessage) => {
 
      let info = transporter.sendMail({
       from: configEmail.user,
-      to: "thalesalmeida@aluno.santoangelo.uri.br",
+      to: "pmorais.almeida@gmail.com; thales.morais21@gmail.com",
       subject: dataMessage.assunto,
       html: mensagem
     })
