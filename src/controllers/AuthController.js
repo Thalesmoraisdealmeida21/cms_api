@@ -32,7 +32,7 @@ module.exports = () =>{
                             userFound
                         }, secret)
                         
-                        res.status(200).json({"token": token, "userId": userFound.id    });
+                        res.status(200).json({"token": token, "idUser": userFound.id     });
                       
                     } else {
                         res.status(401).json({msg: "Usuário não encontrado"})

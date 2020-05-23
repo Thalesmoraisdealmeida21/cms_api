@@ -40,6 +40,15 @@ module.exports = () => {
                 User.findAll().then((users)=>{
                     res.json(users)
                 }
-            )}
+        )
+        },
+
+        getUserById: (req, res)=>{
+            User.findByPk(req.params.id).then((user)=>{
+                res.status(200).json(user);
+            })
+        }
+                
+        
     }
 }
