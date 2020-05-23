@@ -1,6 +1,6 @@
 module.exports = {
     host: "mysql.thalesmoras.kinghost.net",
-    username: "thalesmoras",
+    username: "thalesmo01_add1",
     password: "ta211097", 
     dialect:  "mysql",
     database: "thalesmoras01",
