@@ -1,9 +1,12 @@
 module.exports = {
-    host: "localhost",
-    username: "root",
-    password: "mysql", 
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+
+
+    
+    password: process.env.DB_PASSWORD, 
     dialect:  "mysql",
-    database: "db_cms_api",
+    database: process.env.DB_NAME,
     secret: "1C3C7E1694F1E9DAD939399E87E5FFB5DF06B2327CA31B409CB3",
 
 }
