@@ -10,6 +10,15 @@ module.exports = {
            autoIncrement: true,
            primaryKey: true
          },
+
+         userTenant: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+              model: "Users",
+              key: "id"
+          }
+        },
          nome: {
           type: Sequelize.STRING,
           allowNull: true,

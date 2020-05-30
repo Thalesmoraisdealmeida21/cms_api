@@ -23,6 +23,14 @@ class ConfigEmail extends Model {
       password: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+      userTenant: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: "Users",
+            key: "id"
+        }
       }
     },
     {

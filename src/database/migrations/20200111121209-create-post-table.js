@@ -27,6 +27,14 @@ module.exports = {
                   type: Sequelize.TEXT,
                   allowNull: true
               },
+              userTenant: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "Users",
+                    key: "id"
+                }
+              },
               createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false

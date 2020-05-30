@@ -24,43 +24,59 @@ module.exports = () =>{
                 titulo: req.body.titulo,
                 descricao: req.body.descricao,
                 resumo: req.body.resumo,
-                imgCapa: req.body.imgCapa
+                imgCapa: req.body.imgCapa,
+                tenant: req.body.tenant
             }
+
+
+           
+            
+
+
+            
+                ModelPost.create({
+                    titulo: data.titulo,
+                    descricao: data.descricao,
+                    resumo: data.resumo,
+                    imgCapa: data.imgCapa,
+                    userTenant: data.tenant
+                }).then((userCreated)=> {
+                    res.status(201).json(userCreated)
+                })
+            
+
 
 
      
 
             
 
-            ModelPost.create({
-                titulo: data.titulo,
-                descricao: data.descricao,
-                resumo: data.resumo,
-                imgCapa: data.imgCapa
-            }).then((userCreated)=> {
-                res.status(201).json(userCreated)
-            })
+           
         },
 
         getAllPosts: (req, res)=>{
-                ModelPost.findAll().then((posts)=>{
+                const tenant = req.body.tenant
+                ModelPost.findAll({where: { userTenant: tenant }}).then((posts)=>{
                     res.status(200).json(posts)
                 })
         },
 
         getOnePost: (req, res)=>{
                 const postId = req.params.id
+                const tenant = req.body.tenant
+                
 
-                ModelPost.findByPk(postId).then((post)=>{
+                ModelPost.findOne({where: {userTenant: tenant, id: postId}}).then((post)=>{
                     res.status(200).json(post);
                 })
         },
 
         deletePost: (req, res)=>{
             const postId = req.params.id
-            
+            const tenant = req.body.tenant
             ModelPost.destroy({where: {
-                id: postId
+                id: postId, 
+                userTenant: tenant
             }}).then((resposta)=>{
              
                 if(resposta > 0) {
@@ -81,6 +97,8 @@ module.exports = () =>{
 
         updatePost: (req, res)=>{
                 const postId = req.params.id
+                const tenant = req.body.tenant
+
                 const data = {
                     titulo: req.body.titulo,
                     descricao:  req.body.descricao,
@@ -95,7 +113,8 @@ module.exports = () =>{
                     imgCapa: data.imgCapa
                 }, {
                     where: {
-                    id: postId
+                    id: postId,
+                    tenant: tenant
                 }, 
             }).then((retorno)=>{
                 if(retorno > 0){
@@ -118,9 +137,10 @@ module.exports = () =>{
 
         getPostByTitle: (req, res)=>{
             const { title }= req.params;
-            console.log(title)
+            const tenant = req.body.tenant
+        
             if(title == "none"){
-                ModelPost.findAll().then((posts)=>{
+                ModelPost.findAll({where: {userTenant: tenant}}).then((posts)=>{
                     res.status(200).json(posts)
                 })
             } else {
@@ -128,7 +148,8 @@ module.exports = () =>{
                     where: {
                         titulo:{
                             [Op.like]: '%' + title + '%'
-                        } 
+                        },
+                        tenant: tenant
                     }
                 }).then((post)=>{
                     res.status(200).json(post)
@@ -139,12 +160,14 @@ module.exports = () =>{
         },
         getPostByDescription: (req, res)=>{
             const descricao = req.body.descricao;
+            const tenant = req.body.tenant
 
             ModelPost.findAndCountAll({
                 where: {
                     descricao:{
                         [Op.like]: '%' + descricao + '%'
-                    } 
+                    },
+                    tenant: tenant 
                 }
             }).then((post)=>{
                 res.status(200).json(post)
@@ -188,6 +211,7 @@ module.exports = () =>{
 
         getAllPostsPaginated: (req, res)=>{
             const page = parseInt(req.params.page)
+            const tenant = req.body.tenant
             const offsetPage = ((page - 1) * 3);
             if(offsetPage < 0){
                 res.status(300).json({msg: "Número da página informado é invalido"})
@@ -198,7 +222,12 @@ module.exports = () =>{
                     order: [
                         
                         ['createdAt', 'DESC'],
-                    ]
+                    ],
+
+                    where: {
+                        userTenant: tenant
+
+                    }
                       
                 }).then((posts)=>{
                     res.json(posts)
@@ -208,7 +237,7 @@ module.exports = () =>{
         },
 
         countPosts: (req, res)=>{
-            ModelPost.findAndCountAll().then((postsCounteds)=>{
+            ModelPost.findAndCountAll({where: {userTenant: tenant}}).then((postsCounteds)=>{
                     res.json(postsCounteds);
             })  
         }

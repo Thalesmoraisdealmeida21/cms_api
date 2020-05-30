@@ -17,6 +17,14 @@ module.exports = {
            type: Sequelize.TEXT,
            allowNull: true
          },
+         userTenant: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+              model: "Users",
+              key: "id"
+          }
+        },
          icone: {
           type: Sequelize.STRING,
           allowNull: true
