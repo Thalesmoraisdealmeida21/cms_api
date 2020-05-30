@@ -25,7 +25,7 @@ module.exports = () =>{
                 descricao: req.body.descricao,
                 resumo: req.body.resumo,
                 imgCapa: req.body.imgCapa,
-                tenant: req.body.tenant
+                tenant: req.headers.tenant
             }
 
 
@@ -55,7 +55,7 @@ module.exports = () =>{
         },
 
         getAllPosts: (req, res)=>{
-                const tenant = req.body.tenant
+                const tenant = req.headers.tenant
                 ModelPost.findAll({where: { userTenant: tenant }}).then((posts)=>{
                     res.status(200).json(posts)
                 })
@@ -63,7 +63,7 @@ module.exports = () =>{
 
         getOnePost: (req, res)=>{
                 const postId = req.params.id
-                const tenant = req.body.tenant
+                const tenant = req.headers.tenant
                 
 
                 ModelPost.findOne({where: {userTenant: tenant, id: postId}}).then((post)=>{
@@ -73,7 +73,7 @@ module.exports = () =>{
 
         deletePost: (req, res)=>{
             const postId = req.params.id
-            const tenant = req.body.tenant
+            const tenant = req.headers.tenant
             ModelPost.destroy({where: {
                 id: postId, 
                 userTenant: tenant
@@ -97,7 +97,7 @@ module.exports = () =>{
 
         updatePost: (req, res)=>{
                 const postId = req.params.id
-                const tenant = req.body.tenant
+                const tenant = req.headers.tenant
 
                 const data = {
                     titulo: req.body.titulo,
@@ -137,7 +137,7 @@ module.exports = () =>{
 
         getPostByTitle: (req, res)=>{
             const { title }= req.params;
-            const tenant = req.body.tenant
+            const tenant = req.headers.tenant
         
             if(title == "none"){
                 ModelPost.findAll({where: {userTenant: tenant}}).then((posts)=>{
@@ -160,7 +160,7 @@ module.exports = () =>{
         },
         getPostByDescription: (req, res)=>{
             const descricao = req.body.descricao;
-            const tenant = req.body.tenant
+            const tenant = req.headers.tenant
 
             ModelPost.findAndCountAll({
                 where: {
@@ -211,7 +211,7 @@ module.exports = () =>{
 
         getAllPostsPaginated: (req, res)=>{
             const page = parseInt(req.params.page)
-            const tenant = req.body.tenant
+            const tenant = req.headers.tenant
             const offsetPage = ((page - 1) * 3);
             if(offsetPage < 0){
                 res.status(300).json({msg: "Número da página informado é invalido"})

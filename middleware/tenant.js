@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
 
     
 
-      const tenant = req.body.tenant
+      const tenant = req.headers.tenant
             console.log("Tenant: " + tenant)
       if(tenant){
 

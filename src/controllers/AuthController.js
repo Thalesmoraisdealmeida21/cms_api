@@ -32,7 +32,7 @@ module.exports = () =>{
                             userFound
                         }, secret)
                         
-                        res.status(200).json({"token": token, "idUser": userFound.id     });
+                        res.status(200).json({"token": token, "idUser": userFound.id});
                       
                     } else {
                         res.status(401).json({msg: "Usuário não encontrado"})
@@ -53,7 +53,6 @@ module.exports = () =>{
             }).then((foundToken)=>{
                
                 if(foundToken.length <= 0){
-                    console.log("entrou aki");
                     blacklist.create({
                         token: token
                     })
