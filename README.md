@@ -47,12 +47,12 @@
 ## 🚀 Ponto de Partida
 Para executar este projeto execute o comando `npm install` para instalar todas as depedências do projeto
 
-# Configurando o banco de dados
+### Configurando o banco de dados
 Após instalado as depêndencias do projeto configure o seu banco dados no arquivo que se encontra em `src/database/config/config.json`
 com ele configurado execute o comando `npx sequelize db:create` para criar os eu banco de dados, feito isto execute o comando de migrações 
 `npx sequelize db:migrate` após executado estes procedimentos o banco de dados ja está configurado.`
 
-# Executando a API
+### Executando a API
 Após o banco de dados configurado execute o comando `npm run dev` para executar o servidor de desenvolvimento.
 
 
